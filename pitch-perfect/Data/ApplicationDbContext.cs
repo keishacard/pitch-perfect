@@ -34,7 +34,7 @@ namespace pitch_perfect.Data
                 Id = "00000000-ffff-ffff-ffff-ffffffffffff"
             };
             var passwordHash = new PasswordHasher<User>();
-            user.PasswordHash = passwordHash.HashPassword(user, "sunny");
+            user.PasswordHash = passwordHash.HashPassword(user, "Sunny1!");
             builder.Entity<User>().HasData(user);
 
             Pitch pitch = new Pitch

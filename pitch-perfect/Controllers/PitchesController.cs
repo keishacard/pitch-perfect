@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,18 +13,33 @@ namespace pitch_perfect.Controllers
 {
     public class PitchesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        //dependency injection for getting current user
 
-        public PitchesController(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+
+        public PitchesController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Pitches
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pitch.ToListAsync());
+            //get curr user
+            //var user = await GetUserAsync();
+            var applicationDbContext = _context.Pitch;
+                //.Where(p => p.UserId == user.Id)
+                //.Include(p => p.UserId)
+                //.Include(p => p.Title);
+            return View(await applicationDbContext.ToListAsync());
         }
+
+
+
 
         // GET: Pitches/Details/5
         public async Task<IActionResult> Details(int? id)
