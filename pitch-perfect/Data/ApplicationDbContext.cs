@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using pitch_perfect.Models;
 
 namespace pitch_perfect.Data
 {
@@ -12,5 +13,6 @@ namespace pitch_perfect.Data
             : base(options)
         {
         }
+        public DbSet<pitch_perfect.Models.Pitch> Pitch { get; set; }
     }
 }

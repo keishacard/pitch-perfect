@@ -1,0 +1,77 @@
+﻿@model IEnumerable<pitch_perfect.Models.Pitch>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Synopsis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubmittedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSubmitted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accepted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAccepted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Synopsis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubmittedTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateSubmitted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accepted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAccepted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PitchId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PitchId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PitchId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
