@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace pitch_perfect.Models
 {
-    public class UserModel : IdentityUser
+    public class User : IdentityUser
     {
         [Required]
     [Display(Name = "Username")]

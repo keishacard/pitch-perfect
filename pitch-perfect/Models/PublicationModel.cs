@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace pitch_perfect.Models
 {
-    public class PublicationModel
+    public class Publication
     {
         [Key]
         public int PublicationId { get; set; }
