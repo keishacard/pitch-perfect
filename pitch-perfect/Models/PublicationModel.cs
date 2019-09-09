@@ -22,6 +22,6 @@ namespace pitch_perfect.Models
 
 
         [Required]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
     }
 }

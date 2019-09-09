@@ -29,6 +29,7 @@ namespace pitch_perfect.Models
         [StringLength(55, ErrorMessage = "Please shorten the note to 55 characters")]
         public string Notes { get; set; }
 
+       
         public string Accepted { get; set; }
 
         public DateTime DateAccepted { get; set; }
