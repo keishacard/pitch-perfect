@@ -13,8 +13,12 @@ namespace pitch_perfect.Models
     [Display(Name = "Username")]
     public string Username { get; set; }
 
-    //[Required]
-    //[Display(Name = "Email")]
-    //    public string Email { get; set; }
-        }
+        //[Required]
+        //[Display(Name = "Email")]
+        //    public string Email { get; set; }
+
+        public virtual ICollection<Pitch> Pitches { get; set; }
+
+        public virtual ICollection<Publication> Publications { get; set; }
+    }
     }
