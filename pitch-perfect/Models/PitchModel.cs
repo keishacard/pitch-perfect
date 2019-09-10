@@ -16,7 +16,7 @@ namespace pitch_perfect.Models
         public string Title { get; set; }
 
         [Required]
-        [StringLength(300, ErrorMessage = "Please shorten the product title to 300 characters")]
+        [StringLength(300, ErrorMessage = "Please shorten the synopsis to 300 characters")]
         public string Synopsis { get; set; }
 
         [Required]
@@ -30,7 +30,7 @@ namespace pitch_perfect.Models
         public string Notes { get; set; }
 
        
-        public string Accepted { get; set; }
+        public int Accepted { get; set; }
 
         public DateTime DateAccepted { get; set; }
 

@@ -24,7 +24,7 @@ namespace pitch_perfect.Data
 
             User user = new User
             {
-                UserName = "Sunny",
+                Username = "Sunny",
                 NormalizedUserName = "SUNNY",
                 Email = "sunny@dog.com",
                 NormalizedEmail = "SUNNY@DOG.COM",
@@ -57,7 +57,7 @@ namespace pitch_perfect.Data
                 Specialty = "Daily newspaper for informed canines"
             };
 
-            builder.Entity<Publication>().HasData(Publication);
+            //builder.Entity<Publication>().HasData(Publication);
         }
     }
 }
