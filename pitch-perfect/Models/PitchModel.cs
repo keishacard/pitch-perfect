@@ -30,9 +30,9 @@ namespace pitch_perfect.Models
         public string Notes { get; set; }
 
        
-        public int Accepted { get; set; }
+        public int? Accepted { get; set; }
 
-        public DateTime DateAccepted { get; set; }
+        public DateTime? DateAccepted { get; set; }
 
         [Required]
         public string UserId { get; set; }

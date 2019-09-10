@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace pitch_perfect.Data.Migrations
+namespace pitch_perfect.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,8 @@ namespace pitch_perfect.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,6 +154,53 @@ namespace pitch_perfect.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Pitch",
+                columns: table => new
+                {
+                    PitchId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(maxLength: 55, nullable: false),
+                    Synopsis = table.Column<string>(maxLength: 300, nullable: false),
+                    SubmittedTo = table.Column<string>(maxLength: 55, nullable: false),
+                    DateSubmitted = table.Column<DateTime>(nullable: false),
+                    Notes = table.Column<string>(maxLength: 55, nullable: true),
+                    Accepted = table.Column<int>(nullable: false),
+                    DateAccepted = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pitch", x => x.PitchId);
+                    table.ForeignKey(
+                        name: "FK_Pitch_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Publication",
+                columns: table => new
+                {
+                    PublicationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(maxLength: 55, nullable: false),
+                    Specialty = table.Column<string>(maxLength: 55, nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Publication", x => x.PublicationId);
+                    table.ForeignKey(
+                        name: "FK_Publication_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +239,16 @@ namespace pitch_perfect.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pitch_UserId",
+                table: "Pitch",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Publication_UserId",
+                table: "Publication",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,6 +267,12 @@ namespace pitch_perfect.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Pitch");
+
+            migrationBuilder.DropTable(
+                name: "Publication");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
