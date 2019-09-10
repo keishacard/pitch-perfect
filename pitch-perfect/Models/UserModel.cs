@@ -9,9 +9,9 @@ namespace pitch_perfect.Models
 {
     public class User : IdentityUser
     {
-        [Required]
-    [Display(Name = "Username")]
-    public string Username { get; set; }
+    //    [Required]
+    //[Display(Name = "Username")]
+    //public string Username { get; set; }
 
         //[Required]
         //[Display(Name = "Email")]

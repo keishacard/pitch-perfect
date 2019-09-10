@@ -23,18 +23,19 @@ namespace pitch_perfect.Controllers
             _context = context;
             _userManager = userManager;
         }
-
-        private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        private Task<User> GetUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
 
         // GET: Pitches
         public async Task<IActionResult> Index()
         {
             //get curr user
-            //var user = await GetUserAsync();
-            var applicationDbContext = _context.Pitch;
-                //.Where(p => p.UserId == user.Id)
-                //.Include(p => p.UserId)
-                //.Include(p => p.Title);
+            var user = await GetUserAsync();
+            var applicationDbContext = _context.Pitch
+                .Where(p => user.Id == p.UserId)
+                .Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -59,11 +60,17 @@ namespace pitch_perfect.Controllers
             return View(pitch);
         }
 
+
+
         // GET: Pitches/Create
         public IActionResult Create()
         {
             return View();
         }
+
+
+
+
 
         // POST: Pitches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
