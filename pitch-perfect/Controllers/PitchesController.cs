@@ -23,18 +23,22 @@ namespace pitch_perfect.Controllers
             _context = context;
             _userManager = userManager;
         }
+        private Task<User> GetUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
+        }
 
-        private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        //private Task<User> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Pitches
         public async Task<IActionResult> Index()
         {
             //get curr user
-            //var user = await GetUserAsync();
-            var applicationDbContext = _context.Pitch;
-                //.Where(p => p.UserId == user.Id)
-                //.Include(p => p.UserId)
-                //.Include(p => p.Title);
+            var user = await GetUserAsync();
+            var applicationDbContext = _context.Pitch
+                .Where(p => p.UserId == user.Id)
+                .Include(p => p.UserId)
+                .Include(p => p.Title);
             return View(await applicationDbContext.ToListAsync());
         }
 
