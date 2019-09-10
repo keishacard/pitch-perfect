@@ -36,9 +36,9 @@ namespace pitch_perfect.Controllers
             //get curr user
             var user = await GetUserAsync();
             var applicationDbContext = _context.Pitch
-                .Where(p => p.UserId == user.Id)
-                .Include(p => p.UserId)
-                .Include(p => p.Title);
+                //.Where(p => p.UserId == user.Id)
+                .Where(p => user.Id == p.UserId)
+                .Include(p => p.User);
             return View(await applicationDbContext.ToListAsync());
         }
 

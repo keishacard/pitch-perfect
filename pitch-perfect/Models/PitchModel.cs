@@ -36,8 +36,11 @@ namespace pitch_perfect.Models
         public DateTime? DateAccepted { get; set; }
 
         [Required]
-        [ForeignKey("AspNetUsers")]
+        [ForeignKey("User")]
         public string UserId { get; set; }
+
+        [Required]
+        public User User { get; set; }
 
 
     }

@@ -23,7 +23,7 @@ namespace pitch_perfect.Models
 
 
         [Required]
-        [ForeignKey("AspNetUsers")]
+        [ForeignKey("User")]
         public string UserId { get; set; }
     }
 }
