@@ -22,6 +22,8 @@ namespace pitch_perfect.Data
         {
             base.OnModelCreating(builder);
 
+            //tried to seed data, couldn't get it to work, will re work later and try again
+
             //User user = new User
             //{
             //    Username = "Sunny",

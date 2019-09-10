@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using pitch_perfect.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using pitch_perfect.Models;
 
 namespace pitch_perfect
 {
@@ -38,7 +39,7 @@ namespace pitch_perfect
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<pitch_perfect.Models.User>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
