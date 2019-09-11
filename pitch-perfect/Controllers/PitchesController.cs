@@ -69,18 +69,22 @@ namespace pitch_perfect.Controllers
         }
 
 
-
-
-
         // POST: Pitches/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
+            var user = await GetUserAsync();
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
+                pitch.UserId = user.Id;
+
                 _context.Add(pitch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
