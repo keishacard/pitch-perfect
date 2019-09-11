@@ -78,6 +78,7 @@ namespace pitch_perfect.Controllers
         public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
             var user = await GetUserAsync();
+            //remove user bc the model will be invalid if not; there is no user column in pitches table
             ModelState.Remove("User");
             ModelState.Remove("UserId");
 
@@ -118,6 +119,7 @@ namespace pitch_perfect.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
             var user = await GetUserAsync();
+            //remove user again, just like above
             ModelState.Remove("User");
 
             if (id != pitch.PitchId)
