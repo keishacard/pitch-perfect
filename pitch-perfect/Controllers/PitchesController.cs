@@ -105,6 +105,8 @@ namespace pitch_perfect.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pitch.UserId);
             return View(pitch);
         }
 
@@ -140,6 +142,7 @@ namespace pitch_perfect.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pitch.UserId);
             return View(pitch);
         }
 
