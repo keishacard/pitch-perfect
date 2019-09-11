@@ -78,6 +78,7 @@ namespace pitch_perfect.Controllers
         public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
             var user = await GetUserAsync();
+            //remove user bc the model will be invalid if not; there is no user column in pitches table
             ModelState.Remove("User");
             ModelState.Remove("UserId");
 
@@ -105,6 +106,8 @@ namespace pitch_perfect.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pitch.UserId);
             return View(pitch);
         }
 
@@ -115,6 +118,10 @@ namespace pitch_perfect.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
+            var user = await GetUserAsync();
+            //remove user again, just like above
+            ModelState.Remove("User");
+
             if (id != pitch.PitchId)
             {
                 return NotFound();
@@ -140,6 +147,7 @@ namespace pitch_perfect.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", pitch.UserId);
             return View(pitch);
         }
 
