@@ -195,7 +195,7 @@ namespace pitch_perfect.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Accepted");
+                    b.Property<bool>("Accepted");
 
                     b.Property<DateTime?>("DateAccepted");
 
@@ -304,7 +304,7 @@ namespace pitch_perfect.Migrations
 
             modelBuilder.Entity("pitch_perfect.Models.Pitch", b =>
                 {
-                    b.HasOne("pitch_perfect.Models.User")
+                    b.HasOne("pitch_perfect.Models.User", "User")
                         .WithMany("Pitches")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -312,7 +312,7 @@ namespace pitch_perfect.Migrations
 
             modelBuilder.Entity("pitch_perfect.Models.Publication", b =>
                 {
-                    b.HasOne("pitch_perfect.Models.User")
+                    b.HasOne("pitch_perfect.Models.User", "User")
                         .WithMany("Publications")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
