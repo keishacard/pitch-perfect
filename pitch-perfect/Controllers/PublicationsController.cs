@@ -70,16 +70,34 @@ namespace pitch_perfect.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("PublicationId,Title,Specialty,UserId")] Publication publication)
         {
+            var user = await GetUserAsync();
+            //remove user bc the model will be invalid if not; there is no user column in pitches table
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
+
             if (ModelState.IsValid)
             {
+                publication.UserId = user.Id;
+
                 _context.Add(publication);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(publication);
         }
+
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(publication);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(publication);
+        //}
 
         // GET: Publications/Edit/5
         public async Task<IActionResult> Edit(int? id)
