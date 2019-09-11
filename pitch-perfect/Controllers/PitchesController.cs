@@ -117,6 +117,9 @@ namespace pitch_perfect.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
+            var user = await GetUserAsync();
+            ModelState.Remove("User");
+
             if (id != pitch.PitchId)
             {
                 return NotFound();
