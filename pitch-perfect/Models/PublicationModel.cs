@@ -25,5 +25,8 @@ namespace pitch_perfect.Models
         [Required]
         [ForeignKey("User")]
         public string UserId { get; set; }
+
+        [Required]
+        public User User { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -12,18 +13,33 @@ namespace pitch_perfect.Controllers
 {
     public class PublicationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        //dependency injection for getting current user
 
-        public PublicationsController(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+
+        public PublicationsController(ApplicationDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
+        }
+        private Task<User> GetUserAsync()
+        {
+            return _userManager.GetUserAsync(HttpContext.User);
         }
 
         // GET: Publications
+
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Publication.ToListAsync());
+            //get curr user
+            var user = await GetUserAsync();
+            var applicationDbContext = _context.Publication
+                .Where(p => user.Id == p.UserId)
+                .Include(p => p.User);
+            return View(await applicationDbContext.ToListAsync());
         }
+
 
         // GET: Publications/Details/5
         public async Task<IActionResult> Details(int? id)
