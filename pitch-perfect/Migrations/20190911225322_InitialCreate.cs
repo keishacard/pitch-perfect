@@ -165,8 +165,8 @@ namespace pitch_perfect.Migrations
                     SubmittedTo = table.Column<string>(maxLength: 55, nullable: false),
                     DateSubmitted = table.Column<DateTime>(nullable: false),
                     Notes = table.Column<string>(maxLength: 55, nullable: true),
-                    Accepted = table.Column<int>(nullable: false),
-                    DateAccepted = table.Column<DateTime>(nullable: false),
+                    Accepted = table.Column<bool>(nullable: false),
+                    DateAccepted = table.Column<DateTime>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
