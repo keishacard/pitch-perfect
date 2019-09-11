@@ -89,16 +89,6 @@ namespace pitch_perfect.Controllers
             return View(publication);
         }
 
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(publication);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(publication);
-        //}
-
         // GET: Publications/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -112,6 +102,7 @@ namespace pitch_perfect.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", publication.UserId);
             return View(publication);
         }
 
@@ -122,6 +113,11 @@ namespace pitch_perfect.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PublicationId,Title,Specialty,UserId")] Publication publication)
         {
+            var user = await GetUserAsync();
+            //remove user again, just like above
+            ModelState.Remove("User");
+            ModelState.Remove("UserId");
+
             if (id != publication.PublicationId)
             {
                 return NotFound();
@@ -147,8 +143,12 @@ namespace pitch_perfect.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", publication.UserId);
             return View(publication);
         }
+
+
+
 
         // GET: Publications/Delete/5
         public async Task<IActionResult> Delete(int? id)
