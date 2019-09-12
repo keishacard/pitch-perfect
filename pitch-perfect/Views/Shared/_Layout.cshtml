@@ -1,5 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@*@inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> UserManager*@
 @inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 
 <!DOCTYPE html>
 <html>
@@ -47,7 +51,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Contacts</a>
                             </li>
                         }
-                        }
+                        
                         else
                         {
                         <li class="nav-item">
