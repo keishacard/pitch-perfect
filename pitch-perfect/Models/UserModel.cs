@@ -9,13 +9,15 @@ namespace pitch_perfect.Models
 {
     public class User : IdentityUser
     {
-    //    [Required]
-    //[Display(Name = "Username")]
-    //public string Username { get; set; }
+        //    [Required]
+        //[Display(Name = "Username")]
+        //public string Username { get; set; }
 
         //[Required]
         //[Display(Name = "Email")]
         //    public string Email { get; set; }
+
+        public string ImagePath { get; set; }
 
         public virtual ICollection<Pitch> Pitches { get; set; }
 
