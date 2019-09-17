@@ -30,8 +30,18 @@ namespace pitch_perfect.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
+        //public async Task<User> GetCurrentUserImg()
+        //{
+        //    var user = _userManager.GetUserAsync(HttpContext.User);
+        //    return user;
+        //}
+
         public IActionResult Index()
         {
+
+            User user = GetUserAsync().Result;
+            ViewBag.CurrentUser = user;
+
             return View();
         }
 

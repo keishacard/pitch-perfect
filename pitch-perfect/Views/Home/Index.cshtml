@@ -1,6 +1,7 @@
 ﻿@model pitch_perfect.Models.User
 @{
     ViewData["Title"] = "Home Page";
+    User currentUser = ViewBag.CurrentUser;
 }
 
     <div class="text-center">
@@ -12,19 +13,22 @@
             <img class="logo-big"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:500px; border-radius:250px" />
         </div>
         <div>
+            @*If user is logged in*@
+            @if(User.Identity.IsAuthenticated)
+            {
+                <h1>Hello @User.Identity.Name</h1>
+                <img src=@currentUser.ImagePath alt="" style="border-radius:50%; max-height:200px" />
+
+            }
+
+            @*Only for users not logged in*@
+            @if(!User.Identity.IsAuthenticated)
+            {
+                <h1>you're not logged in!</h1>
+            }
+            
+            @*You'll see this always*@
+            @*<h2>this is always here</h2>*@
             <p></p>
         </div>
      </div>
-    <div>
-        <dl class="row">
-            @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ImagePath)
-            </dd>*@
-            <dd>
-                <img width="100" height="100" src="~/@Html.DisplayFor(model => model.ImagePath)">
-            </dd>
-        </dl>
-    </div>
