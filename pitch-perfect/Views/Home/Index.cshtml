@@ -1,8 +1,30 @@
-﻿@{
+﻿@model pitch_perfect.Models.User
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
-</div>
+    <div class="text-center">
+       <h1 class="display-4">Welcome, Writer</h1>
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    </div>
+    <div>
+        <div>
+            <img class="logo-big"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:500px; border-radius:250px" />
+        </div>
+        <div>
+            <p></p>
+        </div>
+     </div>
+    <div>
+        <dl class="row">
+            @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ImagePath)
+            </dd>*@
+            <dd>
+                <img width="100" height="100" src="~/@Html.DisplayFor(model => model.ImagePath)">
+            </dd>
+        </dl>
+    </div>

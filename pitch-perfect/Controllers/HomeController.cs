@@ -40,30 +40,6 @@ namespace pitch_perfect.Controllers
             return View();
         }
 
-        //[Authorize]
-        //[HttpPost("ImageUpload")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ImageUpload(IFormFile file)
-        //{
-        //    var user = await GetUserAsync();
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        user.ImagePath = await SaveFile(file, user.Id);
-
-        //        if (user.ImagePath == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        await _userManager.UpdateAsync(user);
-
-        //        return RedirectToAction(nameof(Profile));
-        //    }
-
-        //    return NotFound();
-        //}
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

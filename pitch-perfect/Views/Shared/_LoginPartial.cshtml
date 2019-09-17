@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
         @if (SignInManager.IsSignedIn(User))
         {
-            @*<li class="nav-item"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="avatar" style="max-height:25px; margin-top:.5rem;" /></li>*@
+            <li class="nav-item"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:100px; border-radius:50px" /></li>
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
             </li>
@@ -20,11 +20,6 @@
         }
         else
         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </li>
+            <li class="nav-item"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:100px;" /></li>
         }
     </ul>
