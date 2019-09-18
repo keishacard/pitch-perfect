@@ -24,6 +24,7 @@ namespace pitch_perfect.Models
         [StringLength(55, ErrorMessage = "Please shorten the publication title to 55 characters")]
         public string SubmittedTo { get; set; }
 
+
         [Required]
         public DateTime DateSubmitted { get; set; }
 
