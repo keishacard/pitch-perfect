@@ -63,16 +63,31 @@ namespace pitch_perfect.Controllers
 
 
         // GET: Pitches/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            //    var user = await _userManager.GetUserAsync(HttpContext.User);
+            //    var publicationList = _context.PublicationPitch.Where(p => p.UserId == user.Id).ToList();
+            //    var publicationSelectList = publicationList.Select(type => new SelectListItem
+            //    {
+            //        Text = type.PublicationId,
+            //        Value = type.Id.ToString()
+            //    }).ToList();
+            //    publicationSelectList.Insert(0, new SelectListItem
+            //    {
+            //        Text = "Choose a publication",
+            //        Value = ""
+            //    });
+
+            //    ViewData["publicationList"] = publicationSelectList;
+
             return View();
-        }
+    }
 
 
-        // POST: Pitches/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+    // POST: Pitches/Create
+    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
         [ValidateAntiForgeryToken]
        
         public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)

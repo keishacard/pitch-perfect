@@ -20,7 +20,7 @@ namespace pitch_perfect.Models
         public User User { get; set; }
 
         [ForeignKey("Pitch")]
-        public string PitchId { get; set; }
+        public int PitchId { get; set; }
 
         [Required]
         [ForeignKey("Publication")]
