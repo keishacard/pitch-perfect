@@ -1,6 +1,6 @@
 # Pitch Perfect
 ## An App For Freelance Writers
-    ![image](pitch-perfect/wwwroot/Images/PitchPerfect.jpg)
+![image](pitch-perfect/wwwroot/Images/PitchPerfect.jpg)
 ### What is Pitch Perfect?
 
 An application to make the lives of freelance writers easier, Pitch Perfect helps writers keep track of pitches. This app does away with long, hard-to-read and maintain excel sheets as well as easy-to-lose notes. Keep track of pitch submissions, acceptances, publication dates, and publications that accept writers’ work.
