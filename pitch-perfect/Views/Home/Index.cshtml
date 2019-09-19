@@ -4,16 +4,15 @@
     User currentUser = ViewBag.CurrentUser;
 }
 
-    <div class="text-center">
-       <h1 class="display-4">Welcome, Writer</h1>
-        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
-    </div>
     <div>
         <div>
             @*If user is logged in*@
             @if (User.Identity.IsAuthenticated)
             {
-                <h1>Hello @User.Identity.Name</h1>
+                <div class="text-center">
+                    <h1 class="display-4">Welcome, @User.Identity.Name</h1>
+                </div>
+                @*<h1>Hello @User.Identity.Name</h1>*@
                 <img src=@currentUser.ImagePath alt="" style="border-radius:50%; max-height:200px" />
 
             }
@@ -21,6 +20,9 @@
             @*Only for users not logged in*@
             @if (!User.Identity.IsAuthenticated)
             {
+                <div class="text-center">
+                    <h1 class="display-4">Welcome, Writer</h1>
+                </div>
                 <h1>Please log in or register!</h1>
                 <div>
                     <img class="logo-big"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:500px; border-radius:250px" />
