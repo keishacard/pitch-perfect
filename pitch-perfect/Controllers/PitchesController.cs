@@ -65,20 +65,20 @@ namespace pitch_perfect.Controllers
         // GET: Pitches/Create
         public async Task<IActionResult> Create()
         {
-            //    var user = await _userManager.GetUserAsync(HttpContext.User);
-            //    var publicationList = _context.PublicationPitch.Where(p => p.UserId == user.Id).ToList();
-            //    var publicationSelectList = publicationList.Select(type => new SelectListItem
-            //    {
-            //        Text = type.PublicationId,
-            //        Value = type.Id.ToString()
-            //    }).ToList();
-            //    publicationSelectList.Insert(0, new SelectListItem
-            //    {
-            //        Text = "Choose a publication",
-            //        Value = ""
-            //    });
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var publicationList = _context.PublicationPitch.Where(p => p.UserId == user.Id).ToList();
+            var publicationSelectList = publicationList.Select(type => new SelectListItem
+            {
+                Text = type.Publication.Title,
+                Value = type.Id.ToString()
+            }).ToList();
+            publicationSelectList.Insert(0, new SelectListItem
+            {
+                Text = "Choose a publication",
+                Value = ""
+            });
 
-            //    ViewData["publicationList"] = publicationSelectList;
+            //ViewData["publicationList"] = publicationSelectList;
 
             return View();
     }
