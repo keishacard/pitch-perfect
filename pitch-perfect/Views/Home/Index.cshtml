@@ -14,7 +14,7 @@
                 </div>
                 @*<h1>Hello @User.Identity.Name</h1>*@
                 <div style="display:flex; flex-direction:row; justify-content:center;">
-                    <img src=@currentUser.ImagePath alt="" style="border-radius:50%; max-height:200px; align-self:center;" />
+                    <img src=@currentUser.ImagePath alt="" style="border-radius:50%; max-height:200px; align-self:center; border:ridge;" />
                 </div>
 
             }
@@ -23,16 +23,18 @@
             @if (!User.Identity.IsAuthenticated)
             {
                 <div class="text-center">
-                    <h1 class="display-4">Welcome, Writer</h1>
+                    <h1 class="display-4 font-weight-bold">Welcome, Writer</h1>
                 </div>
-                <h1>Please log in or register!</h1>
-                <div>
-                    <img class="logo-big"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:500px; border-radius:250px" />
+                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                    <h2 class="font-weight-light">Please log in or register!</h2>
+                    <div>
+                        <img class="logo-big"><img src="~/Images/PitchPerfect.jpg" alt="logo" style="max-height:20rem; border-radius:250px" />
+                    </div>
                 </div>
-            }
+                    }
 
-            @*You'll see this always*@
-            @*<h2>this is always here</h2>*@
-            <p></p>
-        </div>
-     </div>
+                    @*You'll see this always*@
+                    @*<h2>this is always here</h2>*@
+                    <p></p>
+                </div>
+            </div>
