@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,14 +25,11 @@ namespace pitch_perfect.Models
         [StringLength(300, ErrorMessage = "Please shorten the synopsis to 300 characters")]
         public string Synopsis { get; set; }
 
-        //[Required]
-        //[StringLength(55, ErrorMessage = "Please shorten the publication title to 55 characters")]
-        //public string SubmittedTo { get; set; }
-
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Required]
+        [DisplayName("Submitted")]
         public DateTime DateSubmitted { get; set; }
 
         [StringLength(55, ErrorMessage = "Please shorten the note to 55 characters")]
