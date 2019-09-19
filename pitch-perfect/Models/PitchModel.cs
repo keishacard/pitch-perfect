@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace pitch_perfect.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Required]
+        [DisplayName("Submitted")]
         public DateTime DateSubmitted { get; set; }
 
         [StringLength(55, ErrorMessage = "Please shorten the note to 55 characters")]
