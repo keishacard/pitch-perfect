@@ -25,6 +25,7 @@ namespace pitch_perfect.Models
         [Required]
         [ForeignKey("Publication")]
         public Publication Publication { get; set; }
+        //public int Publication { get; set; }
 
 
     }

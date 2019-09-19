@@ -78,7 +78,7 @@ namespace pitch_perfect.Controllers
                 Value = ""
             });
 
-            //ViewData["publicationList"] = publicationSelectList;
+            ViewData["publicationList"] = publicationSelectList;
 
             return View();
     }
