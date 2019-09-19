@@ -131,7 +131,7 @@ namespace pitch_perfect.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
+        public async Task<IActionResult> Edit(int id, [Bind("PitchId,Title,Synopsis,PublicationId,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
             var user = await GetUserAsync();
             //remove user again, just like above
