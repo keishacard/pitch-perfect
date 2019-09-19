@@ -28,5 +28,7 @@ namespace pitch_perfect.Models
 
         [Required]
         public User User { get; set; }
+
+        public virtual ICollection<Pitch> Pitches { get; set; }
     }
 }

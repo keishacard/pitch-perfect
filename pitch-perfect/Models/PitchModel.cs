@@ -12,6 +12,10 @@ namespace pitch_perfect.Models
         [Key]
         public int PitchId { get; set; }
 
+        public int PublicationId { get; set; }
+
+        public Publication Publication { get; set; }
+
         [Required]
         [StringLength(55, ErrorMessage = "Please shorten the title to 55 characters")]
         public string Title { get; set; }
@@ -20,11 +24,13 @@ namespace pitch_perfect.Models
         [StringLength(300, ErrorMessage = "Please shorten the synopsis to 300 characters")]
         public string Synopsis { get; set; }
 
-        [Required]
-        [StringLength(55, ErrorMessage = "Please shorten the publication title to 55 characters")]
-        public string SubmittedTo { get; set; }
+        //[Required]
+        //[StringLength(55, ErrorMessage = "Please shorten the publication title to 55 characters")]
+        //public string SubmittedTo { get; set; }
 
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         [Required]
         public DateTime DateSubmitted { get; set; }
 
@@ -34,6 +40,8 @@ namespace pitch_perfect.Models
        
         public bool Accepted { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d}")]
         public DateTime? DateAccepted { get; set; }
 
         [Required]
