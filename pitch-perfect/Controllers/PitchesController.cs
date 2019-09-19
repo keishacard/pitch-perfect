@@ -66,11 +66,11 @@ namespace pitch_perfect.Controllers
         public async Task<IActionResult> Create()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var publicationList = _context.PublicationPitch.Where(p => p.UserId == user.Id).ToList();
-            var publicationSelectList = publicationList.Select(type => new SelectListItem
+            var publicationList = _context.Publication.Where(p => p.UserId == user.Id).ToList();
+            var publicationSelectList = publicationList.Select(publication => new SelectListItem
             {
-                Text = type.Publication.Title,
-                Value = type.Id.ToString()
+                Text = publication.Title,
+                Value = publication.PublicationId.ToString()
             }).ToList();
             publicationSelectList.Insert(0, new SelectListItem
             {
@@ -90,17 +90,17 @@ namespace pitch_perfect.Controllers
     [HttpPost]
         [ValidateAntiForgeryToken]
        
-        public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,SubmittedTo,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
+        public async Task<IActionResult> Create([Bind("PitchId,Title,Synopsis,PublicationId,DateSubmitted,Notes,Accepted,DateAccepted,UserId")] Pitch pitch)
         {
-            var user = await GetUserAsync();
+            //var user = await GetUserAsync();
             //remove user bc the model will be invalid if not; there is no user column in pitches table
             ModelState.Remove("User");
             ModelState.Remove("UserId");
 
             if (ModelState.IsValid)
             {
+                var user = await GetUserAsync();
                 pitch.UserId = user.Id;
-
                 _context.Add(pitch);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

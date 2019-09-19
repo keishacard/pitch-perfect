@@ -10,14 +10,14 @@ using pitch_perfect.Data;
 namespace pitch_perfect.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190917141600_followingDirections")]
-    partial class followingDirections
+    [Migration("20190919153325_initially")]
+    partial class initially
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -150,9 +150,7 @@ namespace pitch_perfect.Migrations
                     b.Property<string>("Notes")
                         .HasMaxLength(55);
 
-                    b.Property<string>("SubmittedTo")
-                        .IsRequired()
-                        .HasMaxLength(55);
+                    b.Property<int>("PublicationId");
 
                     b.Property<string>("Synopsis")
                         .IsRequired()
@@ -166,6 +164,8 @@ namespace pitch_perfect.Migrations
                         .IsRequired();
 
                     b.HasKey("PitchId");
+
+                    b.HasIndex("PublicationId");
 
                     b.HasIndex("UserId");
 
@@ -296,6 +296,11 @@ namespace pitch_perfect.Migrations
 
             modelBuilder.Entity("pitch_perfect.Models.Pitch", b =>
                 {
+                    b.HasOne("pitch_perfect.Models.Publication", "Publication")
+                        .WithMany("Pitches")
+                        .HasForeignKey("PublicationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("pitch_perfect.Models.User", "User")
                         .WithMany("Pitches")
                         .HasForeignKey("UserId")

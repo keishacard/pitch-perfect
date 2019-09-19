@@ -18,11 +18,16 @@ namespace pitch_perfect.Data
         public DbSet<Pitch> Pitch { get; set; }
         public DbSet<Publication> Publication { get; set; }
 
-        public DbSet<PublicationPitch> PublicationPitch { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            // Restrict deletion of related order when OrderProducts entry is removed
+            builder.Entity<Pitch>()
+                .HasOne(p => p.Publication)
+                .WithMany(l => l.Pitches)
+                .OnDelete(DeleteBehavior.Restrict);
 
             //tried to seed data, couldn't get it to work, will re work later and try again
 

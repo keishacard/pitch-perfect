@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace pitch_perfect.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace pitch_perfect.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    ImagePath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -155,32 +155,6 @@ namespace pitch_perfect.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pitch",
-                columns: table => new
-                {
-                    PitchId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(maxLength: 55, nullable: false),
-                    Synopsis = table.Column<string>(maxLength: 300, nullable: false),
-                    SubmittedTo = table.Column<string>(maxLength: 55, nullable: false),
-                    DateSubmitted = table.Column<DateTime>(nullable: false),
-                    Notes = table.Column<string>(maxLength: 55, nullable: true),
-                    Accepted = table.Column<bool>(nullable: false),
-                    DateAccepted = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pitch", x => x.PitchId);
-                    table.ForeignKey(
-                        name: "FK_Pitch_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Publication",
                 columns: table => new
                 {
@@ -195,6 +169,39 @@ namespace pitch_perfect.Migrations
                     table.PrimaryKey("PK_Publication", x => x.PublicationId);
                     table.ForeignKey(
                         name: "FK_Publication_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pitch",
+                columns: table => new
+                {
+                    PitchId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PublicationId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(maxLength: 55, nullable: false),
+                    Synopsis = table.Column<string>(maxLength: 300, nullable: false),
+                    SubmittedTo = table.Column<string>(maxLength: 55, nullable: false),
+                    DateSubmitted = table.Column<DateTime>(nullable: false),
+                    Notes = table.Column<string>(maxLength: 55, nullable: true),
+                    Accepted = table.Column<bool>(nullable: false),
+                    DateAccepted = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pitch", x => x.PitchId);
+                    table.ForeignKey(
+                        name: "FK_Pitch_Publication_PublicationId",
+                        column: x => x.PublicationId,
+                        principalTable: "Publication",
+                        principalColumn: "PublicationId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pitch_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -241,6 +248,11 @@ namespace pitch_perfect.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pitch_PublicationId",
+                table: "Pitch",
+                column: "PublicationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pitch_UserId",
                 table: "Pitch",
                 column: "UserId");
@@ -272,10 +284,10 @@ namespace pitch_perfect.Migrations
                 name: "Pitch");
 
             migrationBuilder.DropTable(
-                name: "Publication");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "Publication");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

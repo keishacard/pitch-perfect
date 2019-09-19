@@ -15,7 +15,7 @@ namespace pitch_perfect.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -148,9 +148,7 @@ namespace pitch_perfect.Migrations
                     b.Property<string>("Notes")
                         .HasMaxLength(55);
 
-                    b.Property<string>("SubmittedTo")
-                        .IsRequired()
-                        .HasMaxLength(55);
+                    b.Property<int>("PublicationId");
 
                     b.Property<string>("Synopsis")
                         .IsRequired()
@@ -164,6 +162,8 @@ namespace pitch_perfect.Migrations
                         .IsRequired();
 
                     b.HasKey("PitchId");
+
+                    b.HasIndex("PublicationId");
 
                     b.HasIndex("UserId");
 
@@ -192,26 +192,6 @@ namespace pitch_perfect.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Publication");
-                });
-
-            modelBuilder.Entity("pitch_perfect.Models.PublicationPitch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PitchId");
-
-                    b.Property<int>("PublicationId");
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PublicationPitch");
                 });
 
             modelBuilder.Entity("pitch_perfect.Models.User", b =>
@@ -314,6 +294,11 @@ namespace pitch_perfect.Migrations
 
             modelBuilder.Entity("pitch_perfect.Models.Pitch", b =>
                 {
+                    b.HasOne("pitch_perfect.Models.Publication", "Publication")
+                        .WithMany("Pitches")
+                        .HasForeignKey("PublicationId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("pitch_perfect.Models.User", "User")
                         .WithMany("Pitches")
                         .HasForeignKey("UserId")
@@ -324,14 +309,6 @@ namespace pitch_perfect.Migrations
                 {
                     b.HasOne("pitch_perfect.Models.User", "User")
                         .WithMany("Publications")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("pitch_perfect.Models.PublicationPitch", b =>
-                {
-                    b.HasOne("pitch_perfect.Models.User", "User")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
